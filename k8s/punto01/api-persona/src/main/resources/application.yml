@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-persona
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  datasource:
+    url: jdbc:mysql://${host}:${port:3306}/${database:demobd}?useUnicode=true&characterEncoding=utf8&useSSL=false&requireSSL=false
+    username: ${username:root}
+    password: ${password:toor}
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+
+opentracing:
+  jaeger:
+    enable-b3-propagation: true
+    probabilistic-sampler:
+      sampling-rate: 1.0
+    log-spans: true
+    http-sender:
+      url: ${JAEGER_URL:http://192.168.1.78:16686/api/traces}
