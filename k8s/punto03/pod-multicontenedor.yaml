@@ -15,7 +15,9 @@ spec:
         - containerPort: 8080
      env:
         - name: host
-          value: localhost
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
         - name: port
           value: "3306"
         - name: MYSQL_ROOT_PASSWORD
@@ -23,7 +25,7 @@ spec:
         - name: MYSQL_ROOT_HOST
           value: "%"
    - name: bd   
-     image: juanmendieta/database
+     image: juanmendieta21/database
      ports:
         - containerPort: 3306
   restartPolicy: OnFailure 
