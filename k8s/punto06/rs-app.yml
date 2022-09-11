@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs-api-persona
+  namespace: name1
+spec:
+  selector:
+    matchLabels:
+      app: api-persona
+  replicas: 2
+  template:
+    metadata:
+      name: api-persona
+      namespace: name1
+      annotations:
+        sample: 800-555-1212
+      labels:
+        app: api-persona
+        version: v1
+    spec:
+      containers:
+      - name: api-persona 
+        image: juanmendieta21/api-persona
+        ports:
+            - containerPort: 8080
+        env:
+            - name: host
+              valueFrom:
+                configMapKeyRef:
+                  name: config-name1
+                  key: hostbd
+            - name: port
+              valueFrom:
+                configMapKeyRef:
+                  name: config-name1
+                  key: portbd
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: config-name1
+                  key: pwdbd
+            - name: MYSQL_ROOT_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: config-name1
+                  key: roothost

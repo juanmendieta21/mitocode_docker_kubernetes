@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-name1
+  namespace: name1
+data:
+  hostbd: "my-cips-database.name1.svc"
+  portbd: "3306"
+  pwdbd: toor
+  roothost: "%"
