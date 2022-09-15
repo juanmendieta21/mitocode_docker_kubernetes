@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-app
+  namespace: name2
+data:
+  hostbd: "mysql.name2.svc"
